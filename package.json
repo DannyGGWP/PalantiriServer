@@ -9,6 +9,6 @@
   "author": "Team 237 Programming",
   "license": "ISC",
   "dependencies": {
-    "mongodb": "^3.5.2"
+    "mysql": "^2.18.1"
   }
 }
