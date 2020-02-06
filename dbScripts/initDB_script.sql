@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS `scouting_db`.`match_results` (
+  `result_oid` INT NOT NULL AUTO_INCREMENT,
+  `match_number` INT NULL,
+  `team_number` INT NULL,
+  `alliance_station` VARCHAR(45) NULL,
+  `auto_low` INT NULL,
+  `auto_high` INT NULL,
+  `tele_op_low` INT NULL,
+  `tele_op_high` INT NULL,
+  `auto_line` BOOLEAN NULL,
+  `wheel_stage_2` BOOLEAN NULL,
+  `wheel_stage_3` BOOLEAN NULL,
+  `hang` BOOLEAN NULL,
+  `balanced` BOOLEAN NULL,
+  `played_defence` BOOLEAN NULL,
+  PRIMARY KEY (`result_oid`))
