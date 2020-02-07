@@ -4,7 +4,8 @@ var config  = {
     host: "localhost",
     user: "ScoutingAppLocal",
     password: "scouting2020",
-    database: "scouting_db"
+    database: "scouting_db", 
+    multipleStatements: true
 }; 
 var con = mysql.createConnection(config); 
 con.connect((err)=>
