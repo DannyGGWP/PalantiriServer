@@ -4,16 +4,19 @@ const router = express.Router();
 const mysqlCon = require('../connection'); 
 
 router.get('/', (req,res)=>{
-    mysqlCon.query("SELECT * FROM match_results", (err, rows, fields)=>{
+    mysqlCon.query("SELECT match_number, team_number, auto_low, auto_high, tele_op_low, tele_op_high, auto_line, wheel_stage_2, wheel_stage_3, hang, balanced, played_defence, notes FROM match_results;", (err, rows, fields)=>{
         if (err) throw err;
-        res.send(rows);  
+        //console.log(rows); 
+        var headers = ["Match Number","Team Number", "Auto Low", "Auto High", "TeleOp Low", "TeleOp High", "Auto Line", "Wheel Stage 2", "Wheel Stage 3", "Hang", "Balanced", "Played Defence", "Notes", ]
+        res.render('matches',{title:"Matches", headings: headers,json: rows});  
     }); 
 })
 
 router.get('/:teamNum',(req,res)=>{
-    mysqlCon.query('SELECT * FROM match_results WHERE team_number = ?',[req.params.teamNum],(err,rows,fields)=>{
+    mysqlCon.query('SELECT match_number, team_number, auto_low, auto_high, tele_op_low, tele_op_high, auto_line, wheel_stage_2, wheel_stage_3, hang, balanced, played_defence, notes FROM match_results WHERE team_number = ?',[req.params.teamNum],(err,rows,fields)=>{
         if (err) throw err; 
-        res.send(rows); 
+        var headers = ["Match Number","Team Number", "Auto Low", "Auto High", "TeleOp Low", "TeleOp High", "Auto Line", "Wheel Stage 2", "Wheel Stage 3", "Hang", "Balanced", "Played Defence", "Notes", ]
+        res.render('matches',{title:"Matches", headings: headers,json: rows});  
     })
 })
 router.post('/',(req,res)=>{

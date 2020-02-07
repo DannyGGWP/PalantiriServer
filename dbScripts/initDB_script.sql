@@ -1,16 +1,20 @@
-CREATE TABLE IF NOT EXISTS `scouting_db`.`match_results` (
-  `result_oid` INT NOT NULL AUTO_INCREMENT,
-  `match_number` INT NULL,
-  `team_number` INT NULL,
-  `alliance_station` VARCHAR(45) NULL,
-  `auto_low` INT NULL,
-  `auto_high` INT NULL,
-  `tele_op_low` INT NULL,
-  `tele_op_high` INT NULL,
-  `auto_line` BOOLEAN NULL,
-  `wheel_stage_2` BOOLEAN NULL,
-  `wheel_stage_3` BOOLEAN NULL,
-  `hang` BOOLEAN NULL,
-  `balanced` BOOLEAN NULL,
-  `played_defence` BOOLEAN NULL,
-  PRIMARY KEY (`result_oid`))
+CREATE TABLE `match_results` (
+  `result_oid` int NOT NULL AUTO_INCREMENT,
+  `match_number` int DEFAULT NULL,
+  `team_number` int DEFAULT NULL,
+  `alliance_station` varchar(45) DEFAULT NULL,
+  `auto_low` int DEFAULT NULL,
+  `auto_high` int DEFAULT NULL,
+  `tele_op_low` int DEFAULT NULL,
+  `tele_op_high` int DEFAULT NULL,
+  `auto_line` tinyint(1) DEFAULT NULL,
+  `wheel_stage_2` tinyint(1) DEFAULT NULL,
+  `wheel_stage_3` tinyint(1) DEFAULT NULL,
+  `hang` tinyint(1) DEFAULT NULL,
+  `balanced` tinyint(1) DEFAULT NULL,
+  `played_defence` tinyint(1) DEFAULT NULL,
+  `notes` text,
+  `comp_loc` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`result_oid`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+

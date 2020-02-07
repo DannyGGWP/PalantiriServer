@@ -1,0 +1,12 @@
+extends layout
+
+block content 
+    h1= title
+    p #{title} 
+    table(border="1" cellpadding="7" cellspacing="7")
+        each heading in headings
+            th= heading
+        each val in json
+            tr
+            each col in val 
+                td= col
