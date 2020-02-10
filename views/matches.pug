@@ -3,10 +3,18 @@ extends layout
 block content 
     h1= title
     p #{title} 
-    table(border="1" cellpadding="7" cellspacing="7")
+    table(class='resultsTable')
         each heading in headings
             th= heading
         each val in json
             tr
-            each col in val 
-                td= col
+            each col, index in val 
+                -if (index == 'team_number')
+                    - var url = '/teams/'+col
+                    td: a(href=url)= col
+                -else if (index == 'match_number')
+                    -var url = '/matches/'+col
+                    td: a(href=url)= col
+                -else 
+                    td= col
+                    

@@ -1,8 +1,43 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #ede9d1;
+  background-color: #2b2a2a;
 }
 
 a {
-  color: #00B7FF;
+  color: #e8c702;
+}
+
+table.resultsTable {
+  
+  border-radius: 4px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  width: 100%;
+  text-align: center;
+}
+th {
+  border-bottom: 1px solid;
+  font-size: medium;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 4px;
+  padding-right: 4px;
+  
+}
+td {
+  font-size: medium;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  border-bottom: 1px solid;
+  
+  min-width: 20px;
+  
+}
+tr:nth-child(even) {
+  background-color: #94907f;
+}
+tr:hover {
+  background-color: #555550;
 }
