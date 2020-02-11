@@ -41,3 +41,16 @@ tr:nth-child(even) {
 tr:hover {
   background-color: #555550;
 }
+
+div.strengthsCloud {
+  border: 1px solid;
+  border-radius: 4px;
+  background-color: #383838;
+  max-width: 25%;
+}
+p.positive {
+  color:lightgreen; 
+}
+p.negative {
+  color: lightcoral;
+}
