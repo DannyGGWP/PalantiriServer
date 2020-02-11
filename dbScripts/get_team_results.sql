@@ -9,6 +9,7 @@ BEGIN
     avg (wheel_stage_3)*100 , 
     avg (hang)*100 , 
     avg(balanced)*100 , 
-    avg (played_defence)*100  
+    avg (played_defence)*100 ,
+    avg (won_match)*100
     FROM match_results where team_number=team_num; 
 END

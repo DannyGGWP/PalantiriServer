@@ -1,20 +1,21 @@
 CREATE TABLE `match_results` (
-  `result_oid` int NOT NULL AUTO_INCREMENT,
-  `match_number` int DEFAULT NULL,
-  `team_number` int DEFAULT NULL,
+  `result_oid` int(11) NOT NULL AUTO_INCREMENT,
+  `match_number` int(11) DEFAULT NULL,
+  `team_number` int(11) DEFAULT NULL,
   `alliance_station` varchar(45) DEFAULT NULL,
-  `auto_low` int DEFAULT NULL,
-  `auto_high` int DEFAULT NULL,
-  `tele_op_low` int DEFAULT NULL,
-  `tele_op_high` int DEFAULT NULL,
+  `auto_low` int(11) DEFAULT NULL,
+  `auto_high` int(11) DEFAULT NULL,
+  `tele_op_low` int(11) DEFAULT NULL,
+  `tele_op_high` int(11) DEFAULT NULL,
   `auto_line` tinyint(1) DEFAULT NULL,
   `wheel_stage_2` tinyint(1) DEFAULT NULL,
   `wheel_stage_3` tinyint(1) DEFAULT NULL,
   `hang` tinyint(1) DEFAULT NULL,
   `balanced` tinyint(1) DEFAULT NULL,
   `played_defence` tinyint(1) DEFAULT NULL,
+  `won_match` tinyint(1) DEFAULT '0',
   `notes` text,
   `comp_loc` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`result_oid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
+  PRIMARY KEY (`result_oid`),
+  UNIQUE KEY `match_result_index` (`match_number`,`team_number`,`comp_loc`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;

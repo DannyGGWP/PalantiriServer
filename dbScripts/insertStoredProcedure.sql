@@ -12,10 +12,12 @@ in wheel_3 boolean,
 in hang boolean,
 in balanced boolean,
 in defence boolean,
+in won_match boolean,
 in notes TEXT, 
 in comp_loc varchar(45)
 )
 BEGIN
+	
 	INSERT INTO `scouting_db`.`match_results`
 	(`match_number`,
 	`team_number`,
@@ -30,6 +32,7 @@ BEGIN
 	`hang`,
 	`balanced`,
 	`played_defence`,
+    `won_match`,
 	`notes`,
 	`comp_loc`)
 	VALUES
@@ -46,7 +49,20 @@ BEGIN
 	hang,
 	balanced,
 	defence,
+    won_match,
 	notes,
-	comp_loc);
+	comp_loc) ON DUPLICATE KEY UPDATE 
+    auto_low = auto_low,
+    auto_high = auto_high,
+    tele_op_low = tele_low,
+    tele_op_high = tele_high,
+    auto_line = auto_line,
+	wheel_stage_2 = wheel_2,
+	wheel_stage_3 = wheel_3,
+	hang = hang,
+	balanced = balanced,
+	played_defence = defence,
+    won_match = won_match, 
+	notes = notes;
     SELECT match_num AS 'matchNum'; 
 END

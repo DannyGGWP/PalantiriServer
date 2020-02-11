@@ -8,7 +8,7 @@ router.get('/:teamNum',(req,res)=>{
     var query = "SET @teamNum = ?; CALL get_team_results(@teamNum); "
     mysqlCon.query(query,req.params.teamNum,(err,rows,fields)=>{
         if (err) throw err; 
-        var headers = ["Avg Auto Low", "Avg Auto High", "Avg Tele Op Low", "Avg Tele Op High", "% Drove in Auto", "% Wheel Level 2", "% Wheel Level 3", "% Hang", "% Balanced", "% Played Defence"]; 
+        var headers = ["Avg Auto Low", "Avg Auto High", "Avg Tele Op Low", "Avg Tele Op High", "% Drove in Auto", "% Wheel Level 2", "% Wheel Level 3", "% Hang", "% Balanced", "% Played Defence", "Win Rate"]; 
         console.log(rows); 
         res.render('teams',{
             title: "Results For Team "+team,
