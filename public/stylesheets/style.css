@@ -8,7 +8,37 @@ body {
 a {
   color: #e8c702;
 }
+footer {
+  width: max-content;
+  padding: 10px; 
+  align-items: center;
+}
+h1.appName {
+  color: goldenrod;
+}
+div.container {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+div.stats {
+  border: 1px solid;
+  border-radius: 4px;
+  background-color: #383838;
+  min-height: 10%;
+  min-width: 10%;
+  float: left;
+  padding: 7px;
+  margin-right: 10px;
+} 
+table.statTable{
+  border: 0px;
 
+}
+td.stat {
+  background-color: transparent;
+
+}
 table.resultsTable {
   
   border-radius: 4px;
@@ -26,7 +56,7 @@ th {
   padding-right: 4px;
   
 }
-td {
+td.result {
   font-size: medium;
   padding-bottom: 4px;
   padding-top: 4px;
@@ -35,9 +65,7 @@ td {
   min-width: 20px;
   
 }
-tr:nth-child(even) {
-  background-color: #94907f;
-}
+
 tr:hover {
   background-color: #555550;
 }
@@ -46,11 +74,11 @@ div.strengthsCloud {
   border: 1px solid;
   border-radius: 4px;
   background-color: #383838;
-  max-width: 25%;
+  max-width: 50%;
 }
-p.positive {
+li.positive {
   color:lightgreen; 
 }
-p.negative {
+li.negative {
   color: lightcoral;
 }

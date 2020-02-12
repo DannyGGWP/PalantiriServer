@@ -1,5 +1,62 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h2 Results at a glance
+  div(class='container')
+    div(class='stats')
+      - if (comp.length > 0)
+        h3 Totals for #{comp}!
+      - else 
+        h3 Totals!
+      table(class='statTable')
+        each total,key in totals
+          - var name = ''
+          case key
+            when 'SUM(auto_low)'
+              -name = 'Total Low Goal Power Cells Scored in Auto'
+            when 'SUM(auto_high)'
+              - name = 'Total High Goal Power Cells Scored in Auto'
+            when 'SUM(tele_op_low)'
+              - name = 'Total Low Goal Power Cells Scored'
+            when 'SUM(tele_op_high)'
+              - name = 'Total High Goal Power Cells Scored'
+            when 'SUM(wheel_stage_2)'
+              - name = 'Total Shields Charged Completed'
+            when 'SUM(wheel_stage_3)'
+              - name = 'Total Shields Activated Completed'
+            when 'SUM(hang)'
+              - name = 'Total Robot Hangs'
+            when 'SUM(balanced)'
+              - name = 'Total Balanced Robots'
+          tr
+          td(class='stat')= name+': '
+          td(class='stat')= total
+
+    div(class='stats')
+      - if (comp.length > 0)
+        h3 Average for #{comp}!
+      - else 
+        h3 Average!
+      table(class='statTable')
+        each average,key in averages
+          - var name = ''
+          case key
+            when 'AVG(auto_low)'
+              -name = 'Average Low Goals in Auto '
+            when 'AVG(auto_high)'
+              - name = 'Average High Goals in Auto'
+            when 'AVG(tele_op_low)'
+              - name = 'Average Low Goals'
+            when 'AVG(tele_op_high)'
+              - name = 'Average High Goals'
+            when 'AVG(wheel_stage_2)'
+              - name = 'Percent Stage 2 Completed'
+            when 'AVG(wheel_stage_3)'
+              - name = 'Percent Stage 3 Completed'
+            when 'AVG(hang)'
+              - name = 'Success Percentage of Hang'
+            when 'AVG(balanced)'
+              - name = 'Percent of Balanced Robots'
+          tr 
+            td(class='stat')= name+': '
+            td(class='stat')= average

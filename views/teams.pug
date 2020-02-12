@@ -1,7 +1,7 @@
 extends layout
 
 block content 
-    h1= title
+    h2= title
     p #{title} 
     table(class='resultsTable')
         each heading in headings
@@ -9,55 +9,31 @@ block content
         each val in results
             tr
             each col in val 
-                td= col
+                td(class='result')= col
     h3 Strengths and Weaknesses 
     div(class='strengthsCloud')
-        each val in results 
-            each col,index in val
-                case index
-                    when 'AVG(auto_low)'
-                        //- console.log("avg low hit ")
-                        - if (col > 2)
-                            p(class='positive') +Low Goal Auto
-                        - else if (col <= 1)
-                            p(class='negative') -Low Goal Auto
-                    when 'AVG(auto_high)'
-                        - if (col > 2)
-                            p(class='positive') +High Goal Auto
-                        - else if (col <= 1)
-                            p(class='negative') -High Goal Auto
-                    when 'AVG(tele_op_low)'
-                        - if (col > 20)
-                            p(class='positive') +Low Goal 
-                        - else if (col < 5)
-                            p(class='negative') -Low Goal
-                    when 'AVG(tele_op_high)'
-                        - if (col > 20)
-                            p(class='positive') +High Goal 
-                        - else if (col < 0)
-                            p(class='negative') -High Goal
-                    when 'avg (auto_line)*100'
-                        - if (col > 20)
-                            p(class='positive') +Auto Line 
-                        - else if (col < 0)
-                            p(class='negative') -Auto Line
-                    when 'avg(wheel_stage_2)*100'
-                        - if (col > 0.8)
-                            p(class='positive') +Level 2 Wheel 
-                        - else if (col < 0)
-                            p(class='negative') -Level 2 Wheel
-                    when 'avg (wheel_stage_3)*100'
-                        - if (col > 0.8)
-                            p(class='positive') +Level 3 Wheel 
-                        - else if (col < 0.2)
-                            p(class='negative') -Level 3 Wheel
-                    when 'avg (hang)*100'
-                        - if (col > 0.8)
-                            p(class='positive') +Hang 
-                        - else if (col < 0.2)
-                            p(class='negative') -Hang
-                    when 'avg(balanced)*100'
-                        - if (col > .80)
-                            p(class='positive') +Balance 
-                        - else if (col < 0.2)
-                            p(class='negative') -Balance
+        ul 
+            each stat,index in teamStats
+                - if (index == 'team_number')
+                    - 
+                - else      
+                    - if (stat > 60)
+                        li(class='positive') + #{index}
+                    - else if (stat < 20)
+                        li(class='negative') - #{index}
+    h3 Team #{team}'s Ranking Compared to other teams
+    div(class="strengthsCloud")
+        ul(class='percentileList')
+            each stat,index in teamStats
+                - if (index == 'team_number')
+                    - 
+                - else 
+                    - var th = "th"
+                    - if ((stat % 10) == 1)
+                        - th = "st"
+                    - else if (stat % 10 == 2)
+                        - th = "nd"
+                    - else if (stat % 10 == 3)
+                        - th = "rd"
+                    li #{index}: #{stat}#{th} percentile
+
