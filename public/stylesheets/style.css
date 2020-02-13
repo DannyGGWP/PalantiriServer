@@ -1,8 +1,8 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  color: #ede9d1;
-  background-color: #2b2a2a;
+  color: #fdfaea;
+  background-color: #3d3d3d;
 }
 
 a {
@@ -15,6 +15,13 @@ footer {
 }
 h1.appName {
   color: goldenrod;
+  text-shadow: 3px 3px 1px #000000;
+}
+h2 {
+  text-shadow: 2px 2px 1px #000000;
+}
+h3 {
+  text-shadow: 2px 2px 1px #000000;
 }
 div.container {
   padding: 10px;
@@ -40,12 +47,13 @@ td.stat {
 
 }
 table.resultsTable {
-  
+  border: 0px; 
   border-radius: 4px;
   padding-top: 7px;
   padding-bottom: 7px;
   width: 100%;
   text-align: center;
+  text-shadow: 1px 1px 1px #000000;
 }
 th {
   border-bottom: 1px solid;
@@ -65,20 +73,22 @@ td.result {
   min-width: 20px;
   
 }
-
-tr:hover {
-  background-color: #555550;
-}
-
 div.strengthsCloud {
   border: 1px solid;
   border-radius: 4px;
-  background-color: #383838;
+  background-color: #7c7c7c;
   max-width: 50%;
+  box-shadow: 1px 1px 3px #000000;
+}
+ul.strengthsList{
+  list-style-type: none;
+  padding: 10px;
 }
 li.positive {
   color:lightgreen; 
+  text-shadow: 1px 1px 2px darkgreen;
 }
 li.negative {
   color: lightcoral;
+  text-shadow: 1px 1px 2px darkred;
 }

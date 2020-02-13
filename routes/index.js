@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/:compLoc', function(req, res, next) {
+router.get('/comp/:compLoc', function(req, res, next) {
   var query = "SET @comp_loc = ?; CALL get_comp_totals(@comp_loc); CALL get_comp_avgs(@comp_loc); ";
   mysqlCon.query(query,req.params.compLoc,(err,rows,fields)=>{
     if (err) throw err;

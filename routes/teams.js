@@ -8,7 +8,7 @@ router.get('/:teamNum',(req,res)=>{
     var query = "SET @teamNum = ?; CALL get_team_results(@teamNum); CALL calc_percentiles()"
     mysqlCon.query(query,req.params.teamNum,(err,rows,fields)=>{
         if (err) throw err; 
-        var headers = ["Avg Auto Low", "Avg Auto High", "Avg Tele Op Low", "Avg Tele Op High", "% Drove in Auto", "% Wheel Level 2", "% Wheel Level 3", "% Hang", "% Balanced", "% Played Defence", "Win Rate"]; 
+        var headers = ["Auto Low", "Auto High", "Tele Op Low", "Tele Op High", "Auto Line", "Wheel Level 2", "Wheel Level 3", "Hang", "Balanced", "Played Defence", "Win Rate"]; 
         //console.log(rows); 
         var team_percentile; 
         for (var i = 0; i < rows.length; i++)

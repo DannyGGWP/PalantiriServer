@@ -2,7 +2,7 @@ extends layout
 
 block content 
     h2= title
-    p #{title} 
+    h3 Team #{team}'s average stats
     table(class='resultsTable')
         each heading in headings
             th= heading
@@ -12,7 +12,7 @@ block content
                 td(class='result')= col
     h3 Strengths and Weaknesses 
     div(class='strengthsCloud')
-        ul 
+        ul(class='strengthsList')
             each stat,index in teamStats
                 - if (index == 'team_number')
                     - 
@@ -21,9 +21,9 @@ block content
                         li(class='positive') + #{index}
                     - else if (stat < 20)
                         li(class='negative') - #{index}
-    h3 Team #{team}'s Ranking Compared to other teams
+    h3 Team #{team}'s Abilities Compared to other teams
     div(class="strengthsCloud")
-        ul(class='percentileList')
+        table(class='statTable')
             each stat,index in teamStats
                 - if (index == 'team_number')
                     - 
@@ -35,5 +35,7 @@ block content
                         - th = "nd"
                     - else if (stat % 10 == 3)
                         - th = "rd"
-                    li #{index}: #{stat}#{th} percentile
+                    tr 
+                        td(class='stat') #{index}: 
+                        td(class='stat') #{stat}#{th} percentile
 
