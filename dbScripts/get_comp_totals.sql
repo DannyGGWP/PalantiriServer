@@ -7,10 +7,10 @@ BEGIN
 	SUM(auto_high), 
 	SUM(tele_op_low), 
 	SUM(tele_op_high),
-	SUM(wheel_stage_2),
-	SUM(wheel_stage_3),
-	SUM(hang),
-	SUM(balanced)
+	SUM(hang_1),
+	SUM(hang_2),
+	SUM(hang_3),
+	SUM(hang_4)
 	from match_results; 
 ELSE 
 	SELECT 
@@ -18,10 +18,10 @@ ELSE
 	SUM(auto_high), 
 	SUM(tele_op_low), 
 	SUM(tele_op_high),
-	SUM(wheel_stage_2),
-	SUM(wheel_stage_3),
-	SUM(hang),
-	SUM(balanced)
+	SUM(hang_1),
+	SUM(hang_2),
+	SUM(hang_3),
+	SUM(hang_4)
 	from match_results WHERE comp_loc=comp_loc;
  END IF; 
 END
