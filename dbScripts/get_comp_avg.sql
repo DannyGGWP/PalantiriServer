@@ -7,10 +7,10 @@ BEGIN
 	AVG(auto_high), 
 	AVG(tele_op_low), 
 	AVG(tele_op_high),
-	AVG(wheel_stage_2),
-	AVG(wheel_stage_3),
-	AVG(hang),
-	AVG(balanced)
+	AVG(hang_1),
+	AVG(hang_2),
+	AVG(hang_3),
+	AVG(hang_4)
 	from match_results; 
 ELSE 
 	SELECT 
@@ -18,10 +18,10 @@ ELSE
 	AVG(auto_high), 
 	AVG(tele_op_low), 
 	AVG(tele_op_high),
-	AVG(wheel_stage_2),
-	AVG(wheel_stage_3),
-	AVG(hang),
-	AVG(balanced)
+	AVG(hang_1),
+	AVG(hang_2),
+	AVG(hang_3),
+	AVG(hang_4)
 	from match_results WHERE comp_loc=comp_loc;
  END IF; 
 END

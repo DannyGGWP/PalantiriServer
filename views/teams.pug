@@ -38,4 +38,10 @@ block content
                     tr 
                         td(class='stat') #{index}: 
                         td(class='stat') #{stat}#{th} percentile
-
+    h3 Comments on Team #{team}
+    div(class="strengthsCloud")
+        ul(class="commentList")
+            each commentObj in comments
+                each comment in commentObj
+                    - if (comment != '')
+                        li= comment 

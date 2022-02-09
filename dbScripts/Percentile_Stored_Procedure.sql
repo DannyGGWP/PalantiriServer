@@ -7,10 +7,10 @@ WITH t AS (
         AVG(auto_high) auto_high,
         AVG(tele_op_low) tele_op_low,
         AVG(tele_op_high) tele_op_high,
-        AVG(wheel_stage_2) wheel_stage_2, 
-        AVG(wheel_stage_3) wheel_stage_3,
-        AVG(hang) hang,
-        AVG(balanced) balanced,
+        AVG(hang_1) hang_1, 
+        AVG(hang_2) hang_2,
+        AVG(hang_3) hang_3,
+        AVG(hang_4) hang_4,
         AVG(played_defence) played_defence,
         AVG(won_match) won_match
     FROM
@@ -42,24 +42,24 @@ SELECT
     ,2)*100 pr_tele_op_high,
     ROUND(
        PERCENT_RANK() OVER (
-          ORDER BY wheel_stage_2
+          ORDER BY hang_1
        )
-    ,2)*100 pr_wheel_stage_2,
+    ,2)*100 pr_hang_1,
     ROUND(
        PERCENT_RANK() OVER (
-          ORDER BY wheel_stage_3
+          ORDER BY hang_2
        )
-    ,2)*100 pr_wheel_stage_3,
+    ,2)*100 pr_hang_2,
     ROUND(
        PERCENT_RANK() OVER (
-          ORDER BY hang
+          ORDER BY pr_hang_3
        )
-    ,2)*100 pr_hang,
+    ,2)*100 pr_hang_3,
     ROUND(
        PERCENT_RANK() OVER (
-          ORDER BY balanced
+          ORDER BY hang_4
        )
-    ,2)*100 pr_balanced,
+    ,2)*100 pr_hang_4,
     ROUND(
        PERCENT_RANK() OVER (
           ORDER BY played_defence
