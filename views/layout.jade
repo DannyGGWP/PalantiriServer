@@ -1,7 +1,10 @@
 doctype html
 html
+  include nav.pug
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    +navbar("Plantir","","","")
     block content
+    
