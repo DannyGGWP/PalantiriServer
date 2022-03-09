@@ -17,7 +17,7 @@
  *
  *    Copyright 2020 Team 237
  */
-const mysql = require('mysql'); 
+const mysql = require('mysql2'); 
 
 var config  = {
     host: "localhost",

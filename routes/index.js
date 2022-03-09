@@ -18,7 +18,7 @@
  *    Copyright 2020 Team 237
  */
 var express = require('express');
-var mysql = require('mysql');
+var mysql = require('mysql2');
 var mysqlCon = require('../connection'); 
 var router = express.Router();
 
