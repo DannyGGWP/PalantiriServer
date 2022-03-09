@@ -23,7 +23,7 @@ const router = express.Router();
 const mysqlCon = require('../connection'); 
 
 router.get('/', (req,res)=>{
-    mysqlCon.query("SELECT match_number, team_number, auto_low, auto_high, tele_op_low, tele_op_high, auto_line, wheel_stage_2, wheel_stage_3, hang, balanced, played_defence FROM match_results ORDER BY match_number;", (err, rows, fields)=>{
+    mysqlCon.query("SELECT match_number, team_number, auto_low, auto_high, tele_op_low, tele_op_high, auto_line, hang_1, hang_2, hang_3, hang_4, played_defence FROM match_results ORDER BY match_number;", (err, rows, fields)=>{
         if (err) throw err;
         //console.log(rows); 
         var headers = ["Match Number","Team Number", "Auto Low", "Auto High", "TeleOp Low", "TeleOp High", "Auto Line", "Wheel Stage 2", "Wheel Stage 3", "Hang", "Balanced", "Played Defence", ]
@@ -32,7 +32,7 @@ router.get('/', (req,res)=>{
 })
 
 router.get('/:teamNum',(req,res)=>{
-    mysqlCon.query('SELECT match_number, team_number, auto_low, auto_high, tele_op_low, tele_op_high, auto_line, wheel_stage_2, wheel_stage_3, hang, balanced, played_defence FROM match_results WHERE match_number = ?',[req.params.teamNum],(err,rows,fields)=>{
+    mysqlCon.query('SELECT match_number, team_number, auto_low, auto_high, tele_op_low, tele_op_high, auto_line, hang_1, hang_2, hang_3, hang_4, played_defence FROM match_results WHERE match_number = ?',[req.params.teamNum],(err,rows,fields)=>{
         if (err) throw err; 
         var headers = ["Match Number","Team Number", "Auto Low", "Auto High", "TeleOp Low", "TeleOp High", "Auto Line", "Wheel Stage 2", "Wheel Stage 3", "Hang", "Balanced", "Played Defence", ]
         res.render('matches',{title:"Matches", headings: headers,json: rows});  
@@ -52,10 +52,10 @@ router.post('/',(req,res)=>{
             match.low_score,
             match.high_score,
             match.drove_off_line,
-            match.stage_two_wheel,
-            match.stage_three_wheel,
-            match.hang,
-            match.balanced,
+            match.hang_1,
+            match.hang_2,
+            match.hang_3,
+            match.hang_4,
             match.played_defence,
             match.won_match,
             match.notes,
