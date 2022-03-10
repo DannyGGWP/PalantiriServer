@@ -1,4 +1,4 @@
-CREATE PROCEDURE `calc_percentiles` ()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `calc_percentiles`()
 BEGIN
 WITH t AS (
     SELECT
@@ -52,7 +52,7 @@ SELECT
     ,2)*100 pr_hang_2,
     ROUND(
        PERCENT_RANK() OVER (
-          ORDER BY pr_hang_3
+          ORDER BY hang_3
        )
     ,2)*100 pr_hang_3,
     ROUND(
