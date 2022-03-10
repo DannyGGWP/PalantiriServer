@@ -23,12 +23,13 @@ var path = require('path');
 const mysql = require('mysql2');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const scoutingDB = require('./connection'); 
+var mysqlCon = require('./connection'); 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var matchesRouter = require('./routes/matches'); 
 var teamRouter = require('./routes/teams'); 
+
 
 var app = express();
 
@@ -36,16 +37,35 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(function(req, res, next) {
+  var query = "SELECT DISTINCT team_number FROM match_results;";
+  mysqlCon.query(query,"",(err,rows,fields)=>{
+    if (err) throw err;
+    res.locals['teams'] = rows; 
+  });
+  var matchQerry = "select DISTINCT match_number from match_results;"
+  mysqlCon.query(matchQerry,"",(err,rows,fields)=>{
+    if (err) throw err;
+    res.locals['matches'] = rows; 
+  });
+  next()
+})
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/matches', matchesRouter); 
 app.use('/teams', teamRouter); 
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -61,6 +81,7 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+  next()
 });
 
 module.exports = app;
