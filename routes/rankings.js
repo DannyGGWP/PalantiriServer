@@ -23,11 +23,12 @@ const router = express.Router();
 const mysqlCon = require('../connection'); 
 
 router.get('/', (req,res)=>{
-    mysqlCon.query("", (err, rows, fields)=>{
+    query = "SELECT team_number, avg(tele_op_high) as average_score from match_results group by team_number order by average_score desc;"
+    mysqlCon.query(query, (err, rows, fields)=>{
         if (err) throw err;
-        //console.log(rows); 
-        var headers = ["Match Number","Team Number", "Auto Low", "Auto High", "TeleOp Low", "TeleOp High", "Auto Line", "Wheel Stage 2", "Wheel Stage 3", "Hang", "Balanced", "Played Defence", ]
-        res.render('matches',{title:"Matches", headings: headers,json: rows});  
+        console.log(rows); 
+        headers = ["Team number", "Average Tele Op Shots Made"]
+        res.render('rankings',{title:"Rankings", headings: headers,json: rows});  
     }); 
 }); 
 

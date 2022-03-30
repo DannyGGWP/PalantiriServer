@@ -16,8 +16,11 @@ body
             span.icon-bar
           a.navbar-brand(href='/') 
             img(src="/images/PalantiriLogo.png", alt="Logo" style='width:25px;hight:25px')
+        
         #navbar.navbar-collapse.collapse
           ul.nav.navbar-nav
+            li
+              a(href="/ranking") Rankings
             li.dropdown
               a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
                 | Teams 
@@ -25,7 +28,6 @@ body
               ul.dropdown-menu(role='menu')
                 - if (teams)
                   each team in teams
-                    -console.log(team.team_number)
                     li
                       - var url = '/teams/'+team.team_number
                       a(href=url) !{team.team_number}
@@ -36,7 +38,6 @@ body
               ul.dropdown-menu(role='menu')
                 - if (matches)
                   each match in matches
-                      - console.log(match)
                       li
                         - var url = '/matches/'+match.match_number
                         a(href=url) !{match.match_number}

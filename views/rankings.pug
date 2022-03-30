@@ -1,0 +1,17 @@
+extends layout
+
+block content 
+    h2= title
+    h3 TeleOp Shots Made 
+    div 
+    table(class='resultsTable')
+        each heading in headings
+            th= heading
+        each val in json
+            tr
+            each col, index in val 
+                -if (index == 'team_number')
+                    - var url = '/teams/'+col
+                    td: a(href=url)= col
+                -else 
+                    td= col

@@ -10,6 +10,15 @@ block content
             tr
             each col in val 
                 td(class='result')= col
+    h3 Team #{team}'s Theoretical Best Match
+    table(class='resultsTable' )
+        th Best Auto Low
+        th Best Auto High 
+        th Best TeleOp Low 
+        th Best TeleOp High 
+        tr 
+        each entry in bestMatch[0] 
+            td(class='result')=entry
     h3 Strengths and Weaknesses 
     div(class='strengthsCloud')
         ul(class='strengthsList')

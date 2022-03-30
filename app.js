@@ -29,6 +29,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var matchesRouter = require('./routes/matches'); 
 var teamRouter = require('./routes/teams'); 
+var rankingsRouter = require('./routes/rankings')
 
 
 var app = express();
@@ -38,12 +39,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(function(req, res, next) {
-  var query = "SELECT DISTINCT team_number FROM match_results;";
+  var query = "SELECT DISTINCT team_number FROM match_results order by team_number asc;";
   mysqlCon.query(query,"",(err,rows,fields)=>{
     if (err) throw err;
     res.locals['teams'] = rows; 
   });
-  var matchQerry = "select DISTINCT match_number from match_results;"
+  var matchQerry = "select DISTINCT match_number from match_results order by match_number asc;"
   mysqlCon.query(matchQerry,"",(err,rows,fields)=>{
     if (err) throw err;
     res.locals['matches'] = rows; 
@@ -63,6 +64,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/matches', matchesRouter); 
 app.use('/teams', teamRouter); 
+app.use('/ranking',rankingsRouter);
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 
 
