@@ -2,12 +2,38 @@ extends layout
 
 block content 
     h2= title
-    h3 TeleOp Shots Made 
+    h3 High Goal Ranking 
     div 
     table(class='resultsTable')
-        each heading in headings
+        each heading in headers_high
             th= heading
-        each val in json
+        each val in high
+            tr
+            each col, index in val 
+                -if (index == 'team_number')
+                    - var url = '/teams/'+col
+                    td: a(href=url)= col
+                -else 
+                    td= col
+    h3 Low Goal Ranking 
+    div 
+    table(class='resultsTable')
+        each heading in headers_low
+            th= heading
+        each val in low
+            tr
+            each col, index in val 
+                -if (index == 'team_number')
+                    - var url = '/teams/'+col
+                    td: a(href=url)= col
+                -else 
+                    td= col
+    h3 Hanger Ranking 
+    div 
+    table(class='resultsTable')
+        each heading in headers_hanger
+            th= heading
+        each val in hang
             tr
             each col, index in val 
                 -if (index == 'team_number')
