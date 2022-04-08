@@ -94,3 +94,7 @@ li.negative {
   color: lightcoral;
   text-shadow: 1px 1px 2px darkred;
 }
+div.chartContainer {
+  max-width: 500px;
+  max-height: 400px;
+}
