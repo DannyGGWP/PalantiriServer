@@ -1,6 +1,7 @@
 extends layout
 
-block content 
+block content
+    
     h2= title
     h3 Team #{team}'s average stats
     table(class='resultsTable')
@@ -47,6 +48,11 @@ block content
                     tr 
                         td(class='stat') #{index}: 
                         td(class='stat') #{stat}#{th} percentile
+    h3 Charts 
+    div(class="chartContainer" width="200px" hight="200px")
+        canvas(id="chartPic" )
+            script(type='text/javascript').
+                makeBarChart("chartPic",matchData)
     h3 Comments on Team #{team}
     div(class="strengthsCloud")
         ul(class="commentList")

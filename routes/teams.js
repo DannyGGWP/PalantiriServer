@@ -24,7 +24,14 @@ const mysqlCon = require('../connection');
 
 router.get('/:teamNum',(req,res)=>{
     let team = req.params.teamNum
-    var query = "SET @teamNum = ?; CALL get_team_results(@teamNum); CALL calc_percentiles(); SELECT notes FROM match_results WHERE team_number=@teamNum; select max(auto_low) as best_auto_low, max(auto_high) as best_auto_high, max(tele_op_low) as best_tele_low, max(tele_op_high) as best_tele_high from match_results where team_number=@teamNum;"
+    var query = "SET @teamNum = ?; CALL get_team_results(@teamNum); \
+    CALL calc_percentiles(); \
+    SELECT notes FROM match_results WHERE team_number=@teamNum; \
+    select max(auto_low) as best_auto_low, \
+    max(auto_high) as best_auto_high, \
+    max(tele_op_low) as best_tele_low, \
+    max(tele_op_high) as best_tele_high from match_results where team_number=@teamNum; \
+    select  tele_op_high from match_results where team_number=@teamNum; "
     mysqlCon.query(query,req.params.teamNum,(err,rows,fields)=>{
         if (err) throw err; 
         var headers = ["Auto Low", "Auto High", "Tele Op Low", "Tele Op High", "Auto Line", "Hang Level 3", "Hang Level 4", "Hang Level 1", "Hang Level 2", "Played Defence", "Win Rate"]; 
@@ -42,12 +49,34 @@ router.get('/:teamNum',(req,res)=>{
             
         }
         var comments = []; 
-        for (var ii = 0; ii < rows[rows.length-2].length; ii++ )
+        for (var ii = 0; ii < rows[rows.length-3].length; ii++ )
         {
             //console.log(rows[rows.length-1][ii]);
-            comments[ii] = rows[rows.length-2][ii];
+            comments[ii] = rows[rows.length-3][ii];
         }
-        var best_match = rows[rows.length-1];
+        var best_match = rows[rows.length-2];
+
+        var match_chart_data ={
+            data: {
+            labels: ["red", "green", "blue"],
+            datasets: [{
+                label: 'Points Per Match',
+                data: rows[rows.length-1],
+                backgroundColor: ['grey'],
+                borderColor: ['white'],
+                borderWidth: 1
+            }]
+            },
+        options: {
+            title: {
+                display: true,
+                text: "chart"
+            },
+            legend: {
+                position: 'bottom'
+            }
+        }}; 
+
         //console.log(comments)
         res.render('teams',{
             title: "Results For Team "+team,
@@ -56,7 +85,8 @@ router.get('/:teamNum',(req,res)=>{
             results: rows[1],
             teamStats: team_percentile,
             comments: comments,
-            bestMatch : best_match
+            bestMatch : best_match, 
+            matchData : match_chart_data
             }); 
     });
 }); 
