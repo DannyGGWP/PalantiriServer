@@ -23,12 +23,12 @@ const router = express.Router();
 const mysqlCon = require('../connection'); 
 
 router.get('/', (req,res)=>{
-    query = "SELECT * from best_high_goal_bots_vw where avg_high_tele > 0; SELECT * from best_low_goal_bot where avg_low_tele > 0; SELECT * from best_hanger_bot where pcnt_lvl_2_hangs > 0"
+    query = "SELECT * from best_high_goal_bots_vw where avg_high_tele > 0 order by avg_high_tele desc; SELECT * from best_low_goal_bot where avg_low_tele > 0 order by avg_low_tele desc; SELECT * from best_hanger_bot order by pcnt_lvl_4_hangs desc"
     mysqlCon.query(query, (err, rows, fields)=>{
         if (err) throw err;
         console.log(rows); 
-        headers_high = ["Team number", "Average Auto High Goal","Average Tele Op High Goal"]
-        headers_low = ["Team number", "Average Auto High Goal","Average Tele Op High Goal"]
+        headers_high = ["Team number", "Average Auto","Average Tele Op"]
+        headers_low = ["Team number", "Average Auto","Average Tele Op"]
         headers_hanger = ["Team number", "Percent of Level 2 Hangs","Percent of Level 3 Hangs", "Percent of Level 4 Hangs"]
         res.render('rankings',{title:"Rankings", headers_high: headers_high,headers_low:headers_low,headers_hanger:headers_hanger,high: rows[0],low:rows[1],hang:rows[2]});  
     }); 
