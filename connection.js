@@ -24,7 +24,8 @@ var config  = {
     user: "ScoutingAppLocal",
     password: "scouting2020",
     database: "scouting_db", 
-    multipleStatements: true
+    multipleStatements: true,
+    charset: 'utf8'
 }; 
 var con = mysql.createConnection(config); 
 con.connect((err)=>

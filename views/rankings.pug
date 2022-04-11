@@ -3,6 +3,19 @@ extends layout
 block content 
     h2= title
     div(class='strengthsCloud')
+        h3 Money Ball Calculations 
+        table(class='resultsTable')
+            each heading in money_ball_header
+                th= heading
+            each val in money_ball
+                tr
+                each col, index in val 
+                    -if (index == 'team_number')
+                        - var url = '/teams/'+col
+                        td: a(href=url)= col
+                    -else 
+                        td= col
+    div(class='strengthsCloud')
         h3 High Goal Ranking 
         table(class='resultsTable')
             each heading in headers_high

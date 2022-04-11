@@ -58,7 +58,7 @@ router.post('/',(req,res)=>{
             match.hang_4,
             match.played_defence,
             match.won_match,
-            match.notes,
+            "",
             match.compLoc
         ],(err,rows,fields)=>{
             if (err) throw err; 

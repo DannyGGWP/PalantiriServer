@@ -52,7 +52,7 @@ block content
     div(class="chartContainer" width="200px" hight="200px")
         canvas(id="chartPic" )
             script(type='text/javascript').
-                makeBarChart("chartPic",matchData)
+                makeBarChart("chartPic",!{JSON.stringify(matchNames)},!{JSON.stringify(matchData)});
     h3 Comments on Team #{team}
     div(class="strengthsCloud")
         ul(class="commentList")

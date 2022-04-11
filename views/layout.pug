@@ -43,6 +43,8 @@ body
                       li
                         - var url = '/matches/'+match.match_number
                         a(href=url) !{match.match_number}
+            li
+              a(href="/config") Configure
   h1(class='appName') Palantir 
   block content
   include footer

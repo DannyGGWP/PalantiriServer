@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    
+    h2= title
+    form(method='POST' action='config/save')
+        div.form-group
+            label(for='blCompKey') Blue Alliance Comp Key:
+            input#blCompKey.form-control(type='text', placeholder='BL Comp Key' name='blCompKey')
+        div.form-group
+            label(for='appCompKey') App Comp Key:
+            input#appCompKey.form-control(type='text', placeholder='App Comp Key' name='appCompKey')
+        input(type='submit', value='Update')

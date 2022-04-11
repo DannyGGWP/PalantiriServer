@@ -20,22 +20,31 @@
 const mysql = require('mysql2');
 const express = require('express'); 
 const router = express.Router(); 
+const axios = require('axios');
 const mysqlCon = require('../connection'); 
 
 router.get('/:teamNum',(req,res)=>{
     let team = req.params.teamNum
-    var query = "SET @teamNum = ?; CALL get_team_results(@teamNum); \
+    var blueAlianceTeamKey = "frc"+team
+    
+    var query = "SET @teamNum = ?; \
+    SELECT * from server_settings_table; \
+    CALL get_team_results(@teamNum); \
     CALL calc_percentiles(); \
     SELECT notes FROM match_results WHERE team_number=@teamNum; \
     select max(auto_low) as best_auto_low, \
     max(auto_high) as best_auto_high, \
     max(tele_op_low) as best_tele_low, \
     max(tele_op_high) as best_tele_high from match_results where team_number=@teamNum; \
-    select  tele_op_high from match_results where team_number=@teamNum; "
+    select  auto_low,auto_high, tele_op_high, tele_op_low from specific_comp_match_results_vw where team_number=@teamNum;     "
     mysqlCon.query(query,req.params.teamNum,(err,rows,fields)=>{
         if (err) throw err; 
-        var headers = ["Auto Low", "Auto High", "Tele Op Low", "Tele Op High", "Auto Line", "Hang Level 3", "Hang Level 4", "Hang Level 1", "Hang Level 2", "Played Defence", "Win Rate"]; 
-        console.log(rows); 
+        // Do Blue Alliance Stuff 
+        var bl_key = rows[1]['blue_alliance_comp_key']
+        //axios.get(`http://thebluealiance.com/api/v3/team/${blueAlianceTeamKey}/event/${bl_key}/matches`).then(
+            // Get Match data for team 
+        //)
+        var headers = ["Auto Low", "Auto High", "Tele Op Low", "Tele Op High", "Auto Line", "Hang Level 1", "Hang Level 2", "Hang Level 3", "Hang Level 4", "Played Defence", "Win Rate"]; 
         var team_percentile; 
         for (var i = 0; i < rows.length; i++)
         {
@@ -55,38 +64,24 @@ router.get('/:teamNum',(req,res)=>{
             comments[ii] = rows[rows.length-3][ii];
         }
         var best_match = rows[rows.length-2];
-
-        var match_chart_data ={
-            data: {
-            labels: ["red", "green", "blue"],
-            datasets: [{
-                label: 'Points Per Match',
-                data: rows[rows.length-1],
-                backgroundColor: ['grey'],
-                borderColor: ['white'],
-                borderWidth: 1
-            }]
-            },
-        options: {
-            title: {
-                display: true,
-                text: "chart"
-            },
-            legend: {
-                position: 'bottom'
-            }
-        }}; 
-
-        //console.log(comments)
+        match_points = []; 
+        match_labels = [];
+        for (var iii = 0; iii < rows[rows.length-1].length;iii++)
+        {
+            match_points[iii] = (rows[rows.length-1][iii]['tele_op_high']*2)+(rows[rows.length-1][iii]['tele_op_low'])+(rows[rows.length-1][iii]['auto_high']*4)+(rows[rows.length-1][iii]['auto_low']*2)
+            match_labels[iii] = "Match " + iii; 
+        }
+         
         res.render('teams',{
             title: "Results For Team "+team,
             team: team,
             headings: headers, 
-            results: rows[1],
+            results: rows[2],
             teamStats: team_percentile,
             comments: comments,
             bestMatch : best_match, 
-            matchData : match_chart_data
+            matchData : match_points,
+            matchNames: match_labels
             }); 
     });
 }); 
