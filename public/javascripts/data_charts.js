@@ -22,7 +22,7 @@ function makeBarChart(elementId, labels, data){
     options: {
         title: {
             display: true,
-            text: "Points From Shots Made"
+            text: "Robot Points Per Match"
         },
         scales: {
             y: { 

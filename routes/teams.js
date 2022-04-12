@@ -36,7 +36,7 @@ router.get('/:teamNum',(req,res)=>{
     max(auto_high) as best_auto_high, \
     max(tele_op_low) as best_tele_low, \
     max(tele_op_high) as best_tele_high from match_results where team_number=@teamNum; \
-    select  auto_low,auto_high, tele_op_high, tele_op_low from specific_comp_match_results_vw where team_number=@teamNum;     "
+    select total_points from match_score_vw where team_number=@teamNum;     "
     mysqlCon.query(query,req.params.teamNum,(err,rows,fields)=>{
         if (err) throw err; 
         // Do Blue Alliance Stuff 
@@ -68,7 +68,7 @@ router.get('/:teamNum',(req,res)=>{
         match_labels = [];
         for (var iii = 0; iii < rows[rows.length-1].length;iii++)
         {
-            match_points[iii] = (rows[rows.length-1][iii]['tele_op_high']*2)+(rows[rows.length-1][iii]['tele_op_low'])+(rows[rows.length-1][iii]['auto_high']*4)+(rows[rows.length-1][iii]['auto_low']*2)
+            match_points[iii] = rows[rows.length-1][iii]['total_points']
             match_labels[iii] = "Match " + iii; 
         }
          
