@@ -49,25 +49,30 @@ router.get('/comp/:compLoc', function(req, res, next) {
   });
   
 });
+
 router.get('/config',function(req,res,next){
   res.render('config',{
     title: 'Configure'
   })
 });
 router.post('/config/save',function(req,res,next) {
-  var blComp = req.params.blCompKey; 
-  var appCompKey = req.params.appCompKey; 
+  console.log(req.body)
+  let blComp = req.body.blCompKey; 
+  let appCompKey = req.body.appCompKey; 
   var query = "SET @bl_key = ?; SET @app_key = ?; INSERT INTO `scouting_db`.`server_settings_table`\
-  (\
-  `blue_alliance_comp_key`,\
-  `scouting_app_comp_key`)\
+  ( `oid`,\
+    `blue_alliance_comp_key`,\
+    `scouting_app_comp_key`)\
   VALUES\
-  (\
+  (1,\
   @bl_key,\
   @app_key) ON DUPLICATE KEY UPDATE `blue_alliance_comp_key` = @bl_key, `scouting_app_comp_key` = @app_key;\
   "; 
-  mysqlCon.query(query,blComp,appCompKey,(err,rows,fields)=>{
+  mysqlCon.query(query,[blComp,appCompKey],(err,rows,fields)=>{
     if (err) throw err; 
+    res.render('config',{
+      title: 'Configure'
+    })
   });
 }); 
 
