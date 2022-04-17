@@ -50,7 +50,7 @@ router.get('/comp/:compLoc', function(req, res, next) {
   
 });
 
-router.get('/config',function(req,res,next){
+router.get(['/config','/config/save'],function(req,res,next){
   res.render('config',{
     title: 'Configure'
   })

@@ -1,0 +1,52 @@
+extends layout
+
+block content
+    
+    h2= title
+    form(method='POST' action='/matches')
+        div.form-group
+            label(for='match_number') Match Number:
+            input#blCompKey.form-control(type='number', placeholder='0' name='match_number')
+        div.form-group
+            label(for='team_number') Team Number:
+            input#appCompKey.form-control(type='number', placeholder='0' name='team_number')
+        div.form-group
+            label(for='allianceStation') Alliance Station:
+            input#appCompKey.form-control(type='text', placeholder='Alliance Station' name='allianceStation')
+        div.form-group
+            label(for='auto_low_score') Auto Low:
+            input#appCompKey.form-control(type='number', placeholder='0' name='auto_low_score')
+        div.form-group
+            label(for='auto_high_score') Auto High:
+            input#appCompKey.form-control(type='number', placeholder='0' name='auto_high_score')
+        div.form-group
+            label(for='auto_line') Auto Line:
+            input#appCompKey.form-control(type='checkbox', placeholder='0' name='auto_line')
+        div.form-group
+            label(for='low_score') Tele Low:
+            input#appCompKey.form-control(type='number', placeholder='0' name='low_score')
+        div.form-group
+            label(for='high_score') Tele High:
+            input#appCompKey.form-control(type='number', placeholder='0' name='high_score')
+        div.form-group
+            label(for='hang_1') Hang 1:
+            input#appCompKey.form-control(type='checkbox', placeholder='0' name='hang_1')
+        div.form-group
+            label(for='hang_2') Hang 2:
+            input#appCompKey.form-control(type='checkbox', placeholder='0' name='hang_2')
+        div.form-group
+            label(for='hang_3') Hang 3:
+            input#appCompKey.form-control(type='checkbox', placeholder='0' name='hang_3')
+        div.form-group
+            label(for='hang_4') Hang 4:
+            input#appCompKey.form-control(type='checkbox', placeholder='0' name='hang_4')
+        div.form-group
+            label(for='played_defence') Played Defence? :
+            input#appCompKey.form-control(type='checkbox', placeholder='0' name='played_defence')
+        div.form-group
+            label(for='won_match') Won Match:
+            input#appCompKey.form-control(type='checkbox', placeholder='0' name='won_match')
+        div.form-group
+            label(for='compLoc') Alliance Station:
+            input#appCompKey.form-control(type='text', placeholder='Comp Location ' name='compLoc')
+        input(type='submit', value='Update')

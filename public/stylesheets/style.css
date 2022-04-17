@@ -82,6 +82,12 @@ div.strengthsCloud {
   max-width: 50%;
   box-shadow: 1px 1px 3px #000000;
 }
+div.ranking {
+  border: 1px solid;
+  border-radius: 4px;
+  background-color: #7c7c7c;
+  box-shadow: 1px 1px 3px #000000;
+}
 ul.strengthsList{
   list-style-type: none;
   padding: 10px;
